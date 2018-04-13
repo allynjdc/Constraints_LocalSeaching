@@ -104,7 +104,7 @@ class LeftNeighbor(BinaryConstraint):
 
 ### Magic Square Constraints ### 
 
-class ExactSum(Constraint):
+class ExactSum(Constraint): 
 	def __init__(self,variables,target_sum,penalty=0):
 		self.variables = variables 
 		self.target_sum = target_sum
@@ -119,6 +119,9 @@ class ExactSum(Constraint):
 		# check if sum of values is the target sum
 		# dont test if not all vars assigned
 		# return True / False
+		if sum(values) == target_sum:
+			return True
+		return False
 
 ### Magic Series Constraints ###
 
