@@ -119,7 +119,7 @@ class ExactSum(Constraint):
 		# check if sum of values is the target sum
 		# dont test if not all vars assigned
 		# return True / False
-		if sum(values) == target_sum:
+		if sum(values) == self.target_sum:
 			return True
 		return False
 
