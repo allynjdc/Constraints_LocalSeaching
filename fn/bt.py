@@ -24,6 +24,15 @@ def custom_variable_selector(state):
 	# INSERT CODE HERE
 	# Write your variable ordering code here 
 	# Return an unassigned variable 
+	
+	# Heuristic
+	mini = 99999999
+	for var in problem.unassigned_variables(solution):
+		if len(domain[var]) < mini:
+			mini = len(domain[var])
+			unassigned_var = var
+	return unassigned_var
+	#return random.choice(unassigned_vars)
 
 	# Suggestions: 
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
@@ -54,6 +63,11 @@ def custom_value_ordering(state,variable):
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
+	print("variable: ",variable)
+	print("domain: ",domain)
+
+	for dom in domain:
+
 
 	# Suggestions:
 	# Heuristic: least constraining value (LCV)
