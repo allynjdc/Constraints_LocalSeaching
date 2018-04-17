@@ -25,8 +25,10 @@ def custom_variable_selector(state):
 	# Write your variable ordering code here 
 	# Return an unassigned variable 
 
+	unassigned = problem.unassigned_variables(solution)
+	constrained = getConstraints(state,unassigned)
 	unassigned_var = first_unassigned(state)
-	for var in problem.unassigned_variables(solution):
+	for var in unassigned:
 
 		# Heuristic 1: MRV
 		if len(domain[var]) < len(domain[unassigned_var]):
@@ -34,7 +36,8 @@ def custom_variable_selector(state):
 
 		# Heuristic 2: DH
 		elif len(domain[var]) == len(domain[unassigned_var]):
-			#if len(var) > len(unassigned_var):
+			# selecting variables with more constraints
+			if constrained[var] >= constrained[unassigned_var]:
 				unassigned_var = var
 
 	return unassigned_var
@@ -43,6 +46,21 @@ def custom_variable_selector(state):
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
 	# Heuristic 2: degree heuristic = select variables related to more constraints
 	# Can use just one heuristic, or chain together heuristics (tie-break)
+
+def getConstraints(state, unassigned):
+	problem = state.problem
+	counter = {}
+
+	for var in unassigned:
+		flag = 0
+		for constraint in problem.constraints:
+			for cons_var in constraint.variables:
+				if cons_var in unassigned and (var != cons_var):
+					flag += 1
+				counter[cons_var] = flag
+				
+	return counter
+
 
 ### VALUE ORDERING FUNCTIONS ###
 
