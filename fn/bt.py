@@ -34,7 +34,7 @@ def custom_variable_selector(state):
 
 		# Heuristic 2: DH
 		elif len(domain[var]) == len(domain[unassigned_var]):
-			if len(var) > len(unassigned_var):
+			#if len(var) > len(unassigned_var):
 				unassigned_var = var
 
 	return unassigned_var
@@ -68,7 +68,7 @@ def custom_value_ordering(state,variable):
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
-	return random_order(state, variable)
+	return default_order(state, variable)
 
 
 	# Suggestions:
