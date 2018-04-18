@@ -104,7 +104,7 @@ class LeftNeighbor(BinaryConstraint):
 
 ### Magic Square Constraints ### 
 
-class ExactSum(Constraint):
+class ExactSum(Constraint): 
 	def __init__(self,variables,target_sum,penalty=0):
 		self.variables = variables 
 		self.target_sum = target_sum
@@ -120,6 +120,12 @@ class ExactSum(Constraint):
 		# dont test if not all vars assigned
 		# return True / False
 
+		if len(values) == len(self.variables):
+			return sum(values) == self.target_sum
+		else:
+			return True
+
+
 ### Magic Series Constraints ###
 
 class MagicSeries(Constraint):
@@ -133,6 +139,15 @@ class MagicSeries(Constraint):
 		# Example: if 2 is assigned to index 1, there must be two 1s in the series
 		# dont test if not all vars assigned 
 		# return True / False
+
+		if len(self.variables) != len(solution):
+			return True
+
+		for index in range(len(values)):
+			if values[index] != values.count(index):
+				return False
+
+		return True
 
 ### Knapsack Constraints ###
 
@@ -149,8 +164,15 @@ class KnapsackCapacity(Constraint):
 		# make sure to skip unassigned variables
 		# check that total weight of items included in solution doesn't exceed capacity
 		# return True / False
-		total_weight = 0
-		
+		total_weight = 0		
+		for item in self.variables:
+			if item in solution:
+				if solution[item] == 1:
+					total_weight += item.weight
+		if self.capacity >= total_weight:
+			return True
+
+		return False
 
 ### Vertex Cover Constraints ###
 
@@ -170,3 +192,23 @@ class VertexCover(Constraint):
 		# dont test if not all vars assigned 
 		# return True / False
 		active_vertices = []
+		for vertex in self.variables:
+			if vertex in solution:
+				if solution[vertex] == 1:
+					active_vertices.append(vertex)
+
+		if len(self.variables) != len(solution):
+			return True
+			
+		count = 0
+		for edge in self.edges:
+			if edge[0] in active_vertices or edge[1] in active_vertices:
+				count += 1
+
+		if count == len(self.edges):
+			return True
+
+		return False
+
+
+

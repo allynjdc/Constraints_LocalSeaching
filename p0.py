@@ -32,7 +32,7 @@ def test3():
     # See check/p0.3.txt for correct answer
 
 def test4():
-    problem = knapsack.problem(test_case=0) # 0,1,2,3
+    problem = knapsack.problem(test_case=3) # 0,1,2,3
     problem.display()
 
     solver = brute_force_solver(problem)
@@ -58,10 +58,10 @@ def test5():
     # See checker/p0.5.txt for correct answer
 
 def test6():
-    problem_name = 'plants'     
-    # problem_name = 'magic_square'
+    #problem_name = 'plants'     
+    problem_name = 'magic_square'
     option = 'combination'   
-    # option = 'permutation'   
+    #option = 'permutation'   
 
     if problem_name == 'plants':
         problem = plants.problem()
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 1
+    test = 2
 
     if test == 1:
         test1()
