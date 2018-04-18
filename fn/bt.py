@@ -36,6 +36,7 @@ def custom_variable_selector(state):
 
 		# Heuristic 2: DH
 		elif len(domain[var]) == len(domain[unassigned_var]):
+
 			# selecting which variables has more constraints
 			if constrained[var] >= constrained[unassigned_var]:
 				unassigned_var = var
