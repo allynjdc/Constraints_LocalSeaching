@@ -9,17 +9,17 @@ from utils import *
 
 
 def test1():
-    problem_name = 'plants'
+    # problem_name = 'plants'
     # problem_name = 'magic_square'
     # problem_name = 'magic_series'
     # problem_name = 'knapsack'
-    # problem_name = 'vertex_cover'
+    problem_name = 'vertex_cover'
 
-    # solver_name = 'brute_force'
-    solver_name = 'backtracking'
+    solver_name = 'brute_force'
+    # solver_name = 'backtracking'
 
-    # solution_limit = 0
-    solution_limit = 1
+    solution_limit = 0
+    # solution_limit = 1
 
     problem = select_problem(problem_name)
 
@@ -43,15 +43,15 @@ def test1():
     print('%s \t %s \t limit = %d' % (problem_name,solver_name,solution_limit))
 
 def test2():
-    problem_name = 'plants'
+    # problem_name = 'plants'
     # problem_name = 'einstein'
     # problem_name = 'magic_square'
     # problem_name = 'magic_series'
-    # problem_name = 'knapsack'
+    problem_name = 'knapsack'
     # problem_name = 'vertex_cover'
 
-    # option = 'with_filtering'
-    option = 'no_filtering'
+    option = 'with_filtering'
+    # option = 'no_filtering'
 
     # solution_limit = 0
     solution_limit = 1
@@ -78,21 +78,21 @@ def test2():
     print('%s \t %s \t limit = %d' % (problem_name,option,solution_limit))
 
 def test3():
-    problem_name = 'plants'
+    # problem_name = 'plants'
     # problem_name = 'einstein'
-    # problem_name = 'magic_square'
-    # problem_name = 'magic_series'
+    problem_name = 'magic_square' # WALA 
+    # problem_name = 'magic_series' # WALA
     # problem_name = 'knapsack'
-    # problem_name = 'vertex_cover'
+    # problem_name = 'vertex_cover' # WALA
 
-    solution_limit = 0
-    # solution_limit = 1
+    # solution_limit = 0
+    solution_limit = 1
 
     problem = select_problem(problem_name)
 
     config = Config()
     config.solution_limit = solution_limit
-    config.max_iterations = 999999
+    config.max_iterations = 999999 
     config.explain = False
 
     config.select_variable_fn = custom_variable_selector

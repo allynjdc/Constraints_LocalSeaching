@@ -31,13 +31,8 @@ def change_upto_two_values(state):
 	# Hints for changing 2 values: 
 	# use itertools.combinations and itertools.product
 	# dont reassign to current values
-	# update neighbor.changes 
-	
-	#print("neighbors: ",neighbors)
-	#print("solution: ", solution)
-	#print("domain: ", problem.domain)
+	# update neighbor.changes
 
-	#for var in itertools.combinations(problem.variables,2):
 	for var in problem.variables:
 		for value in problem.domain[var]:
 			if value == solution[var]:
@@ -47,7 +42,11 @@ def change_upto_two_values(state):
 			neighbor.changes = [(var,value)]	# remember what changed from state to neighbor
 		#for value in problem.domain[var[1]]:
 
-	return neighbors
+	for var in itertools.combinations(problem.variables,2):
+		for pair in itertools.product(var,problem.domain):
+			print("pair", pair);
+
+	return neighbor
 
 def swap_two_values(state):
 	problem = state.problem
@@ -58,21 +57,25 @@ def swap_two_values(state):
 	# use itertools.combinations
 	# dont swap same values
 	# update neighbor.changes 
+
+	print("solution",solution)	
+	print("variable", problem.variables)
 	neighbors = []
 	for var1,var2 in itertools.combinations(problem.variables,2):
+		print("var1: ", var1, " var2: ", var2)
+		print("solva1: ", solution[var1], "solva2", solution[var2])
 		if solution[var1] == solution[var2]:
+			print("not valid")
 			continue
-		neighbor1 = state.copy()
-		tempVal = solution[var1]
-		neighbor1.solution[var1] = solution[var2]
-		neighbor1.changes = [(var1, solution[var2])]
 
-		neighbor2 = state.copy()
-		neighbor2.solution[var2] =tempVal
-		neighbor2.changes = [(var2, tempVal)]
-		
-		neighbors.append(neighbor1) 
-		neighbors.append(neighbor2)
+		neighbor = state.copy()
+		tempVal = solution[var1]
+		neighbor.solution[var1] = solution[var2]
+		neighbor.solution[var2] = tempVal
+		neighbor.changes = [(var1, solution[var2]),(var2, tempVal)]
+
+		neighbors.append(neighbor)
+
 	return neighbors
 
 
