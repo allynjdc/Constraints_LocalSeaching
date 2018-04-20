@@ -31,8 +31,24 @@ def change_upto_two_values(state):
 	# Hints for changing 2 values: 
 	# use itertools.combinations and itertools.product
 	# dont reassign to current values
-	# update neighbor.changes 
+	# update neighbor.changes
 
+	for var1,var2 in itertools.combinations(problem.variables,2):
+		dom1 = problem.domain[var1]
+		dom2 = problem.domain[var2]
+
+		for val1,val2 in itertools.product(dom1,dom2):
+			
+			if val1 == solution[var1] and val2 == solution[var2]:
+				continue
+
+			neighbor = state.copy()
+			neighbor.solution[var1] = val1
+			neighbor.solution[var2] = val2
+			neighbor.changes = [(var1,val1),(val2,val2)]
+			neighbors.append(neighbor)
+
+	return neighbors
 
 def swap_two_values(state):
 	problem = state.problem
@@ -43,6 +59,20 @@ def swap_two_values(state):
 	# use itertools.combinations
 	# dont swap same values
 	# update neighbor.changes 
+
+	neighbors = []
+	for var1,var2 in itertools.combinations(problem.variables,2):
+		if solution[var1] == solution[var2]:
+			continue
+	
+		neighbor = state.copy()
+		tempVal = solution[var1]
+		neighbor.solution[var1] = solution[var2]
+		neighbor.solution[var2] = tempVal
+		neighbor.changes = [(var1, solution[var2]),(var2, tempVal)]
+		neighbors.append(neighbor)
+
+	return neighbors
 
 
 ### NEIGHBOR GENERATORS ###
@@ -69,6 +99,14 @@ def change_upto_two_values_generator(state):
 	# Randomly select variables & values
 	# update neighbor.changes 
 	# yield neighbor
+	nb = []
+	for i in range(2):
+		var = random.choice(problem.variables)
+		value = random.choice(problem.domain[var])
+		neighbor.solution[var] = value
+		nb.append((var,value))
+	neighbor.changes(nb)
+	yield neighbor
 
 
 def swap_two_values_generator(state):
@@ -80,6 +118,25 @@ def swap_two_values_generator(state):
 	# Randomly select variables to swap
 	# update neighbor.changes 
 	# yield neighbor
+
+
+	# Temporary Code (by Allyn)
+
+	while True:
+		var1 = random.choice(problem.variables)
+		var2 = random.choice(problem.variables)
+
+		value1 = solution[var2]
+		value2 = solution[var1]
+
+		neighbor = state.copy()
+		neighbor.solution[var1] = value1
+		neighbor.solution[var2] = value2
+		neighbor.changes = [(var1, value1), (var2, value2)]
+		yield neighbor
+
+	#######
+
 
 ### MAX-MIN CONFLICT ###
 

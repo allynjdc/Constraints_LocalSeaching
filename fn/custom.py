@@ -1,6 +1,6 @@
 import random 
 
-### CUSTOM NEIGHBOR GENERATORS ###
+### CUSTOM NEIGHBOR GENERATORS ### 
 
 def maxone_neighbor_generator(state):
     problem = state.problem

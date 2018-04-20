@@ -120,6 +120,9 @@ class ExactSum(Constraint):
 		# dont test if not all vars assigned
 		# return True / False
 
+		# Checks if all variables are assigned. Then, it will 
+		# return True / False if the sum of values is the target sum.
+		# Otherwise, not all variables are assigned then will return True.
 		if len(values) == len(self.variables):
 			return sum(values) == self.target_sum
 		else:
@@ -140,13 +143,19 @@ class MagicSeries(Constraint):
 		# dont test if not all vars assigned 
 		# return True / False
 
+		# Checks if not all variables are assigned. Then, will return True.
+		# Otherwise, all variables are assigned and will test the variables.
 		if len(self.variables) != len(solution):
 			return True
 
+		# Checks if the value every element of the list (values) is not the same number 
+		# of the count of this index of a certain element appears in the list. 
+		# Then it will return False.
 		for index in range(len(values)):
 			if values[index] != values.count(index):
 				return False
 
+		# Otherwise, will return True.
 		return True
 
 ### Knapsack Constraints ###
@@ -164,14 +173,21 @@ class KnapsackCapacity(Constraint):
 		# make sure to skip unassigned variables
 		# check that total weight of items included in solution doesn't exceed capacity
 		# return True / False
-		total_weight = 0		
+
+		# Checks if each item in the variables list which's also in the solution is assigned.
+		# Then, will add the item's weight to the total_weight.
+		total_weight = 0
 		for item in self.variables:
 			if item in solution:
 				if solution[item] == 1:
 					total_weight += item.weight
+
+		# Checks if the value of total_weight is less than or equal to the capacity.
+		# Then, it will return True.
 		if self.capacity >= total_weight:
 			return True
 
+		# Otherwise, will return False.
 		return False
 
 ### Vertex Cover Constraints ###
@@ -191,23 +207,33 @@ class VertexCover(Constraint):
 		# if at least one edge is not covered --> fail
 		# dont test if not all vars assigned 
 		# return True / False
+
+		# Checks if all vertex in the variables list which's in the solution is assigned.
+		# Then, will append this vertex to the list of active_vertices.
 		active_vertices = []
 		for vertex in self.variables:
 			if vertex in solution:
 				if solution[vertex] == 1:
 					active_vertices.append(vertex)
 
+		# Checks if all variables are assigned.
+		# Then, will return True.
 		if len(self.variables) != len(solution):
 			return True
 			
+		# Checks if any of the 2 vertex of every edge is in the active_vertices list.
+		# Then, will increment the count of the edges that was covered by any of the active_vertices. 
 		count = 0
 		for edge in self.edges:
 			if edge[0] in active_vertices or edge[1] in active_vertices:
 				count += 1
 
+		# Checks if the number of count is equal to the length of the edges list.
+		# Then, will return True.
 		if count == len(self.edges):
 			return True
 
+		# Otherwise, will return False.
 		return False
 
 
