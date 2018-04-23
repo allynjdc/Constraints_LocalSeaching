@@ -5,7 +5,7 @@ CHANGE2 - MAXONE
     Total legal neighbors: 11
     Best score: 16
     1 solutions found
-        16   1111111111111111
+        16   1111111111111111 
 **************************************
 SWAP2 - MAXONE
     Restarts: 5
