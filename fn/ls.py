@@ -99,6 +99,14 @@ def change_upto_two_values_generator(state):
 	# Randomly select variables & values
 	# update neighbor.changes 
 	# yield neighbor
+	nb = []
+	for i in range(2):
+		var = random.choice(problem.variables)
+		value = random.choice(problem.domain[var])
+		neighbor.solution[var] = value
+		nb.append((var,value))
+	neighbor.changes(nb)
+	yield neighbor
 
 	# nb = []
 	# for i in range(2):
@@ -146,7 +154,6 @@ def swap_two_values_generator(state):
 		neighbor.solution[variable2] = value
 		neighbor.changes = [(variable, value1), (variable1, value)]
 		yield neighbor
-
 
 
 ### MAX-MIN CONFLICT ###
