@@ -1,6 +1,6 @@
-import random 
+import random  
 
-### CUSTOM NEIGHBOR GENERATORS ###
+### CUSTOM NEIGHBOR GENERATORS ###  
 
 def maxone_neighbor_generator(state):
     problem = state.problem
@@ -38,6 +38,29 @@ def knapsack_neighbor_generator(state):
         # Dont forget to update neighbor.changes
         # yield neighbor
         
+        if constraint.test(solution):
+
+            variable = random.choice(problem.variables)
+            variable1 = random.choice(problem.variables)
+
+            value = random.choice(problem.domain[variable])
+            value1 = random.choice(problem.domain[variable1])
+
+            neighbor.solution[variable] = value
+            neighbor.solution[variable1] = value1
+            neighbor.changes = [(variable, value), (variable1, value1)]
+
+        else:
+
+            newval = 0
+            while True:
+                variable = random.choice(problem.variables)
+                if solution[variable]:
+                    break
+            neighbor.solution[variable] = newval
+            neighbor.changes = [(variable, newval)]
+
+        yield neighbor
 
 def vertex_cover_neighbor_generator(state):
     problem = state.problem
@@ -54,3 +77,21 @@ def vertex_cover_neighbor_generator(state):
         # Hint: check the pattern of maxone_neigbor_generator
         # Dont forget to update neighbor.changes
         # yield neighbor
+        
+        if constraint.test(solution):
+            newval = 0
+            while True:
+                variable = random.choice(problem.variables)
+                if solution[variable]:
+                    break
+        else:
+            newval = 1
+            while True:
+                variable = random.choice(problem.variables)
+                if not solution[variable]:
+                    break
+
+        neighbor.solution[variable] = newval
+        neighbor.changes = [(variable, newval)]
+
+        yield neighbor

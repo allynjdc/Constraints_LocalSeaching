@@ -17,3 +17,4 @@ VERTEX COVER
     1 solutions found
         valid     9    B,C,E,G,H,I,J,K,M
 
+ 
