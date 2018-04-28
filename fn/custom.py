@@ -40,6 +40,10 @@ def knapsack_neighbor_generator(state):
         
         if constraint.test(solution):
 
+            # same with change_upto_two_values_generator(state)
+            # don't know how to call change_upto_two_values_generator(state)
+            # so copy+paste nlng tayo huhuhu
+
             variable = random.choice(problem.variables)
             variable1 = random.choice(problem.variables)
 
