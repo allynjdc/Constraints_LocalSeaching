@@ -99,14 +99,17 @@ def change_upto_two_values_generator(state):
 	# Randomly select variables & values
 	# update neighbor.changes 
 	# yield neighbor
-	nb = []
-	for i in range(2):
-		var = random.choice(problem.variables)
-		value = random.choice(problem.domain[var])
-		neighbor.solution[var] = value
-		nb.append((var,value))
-	neighbor.changes(nb)
-	yield neighbor
+
+	# nb = []
+	# neighbor = state.copy()
+	# for i in range(2):
+	# 	var = random.choice(problem.variables)
+	# 	value = random.choice(problem.domain[var])
+	# 	neighbor.solution[var] = value
+	# 	nb.append((var,value))
+	# #neighbor.changes(nb)
+	# neighbor.changes = nb
+	# yield neighbor
 
 	# nb = []
 	# for i in range(2):
@@ -130,8 +133,6 @@ def change_upto_two_values_generator(state):
 		neighbor.changes = [(variable, value), (variable1, value1)]
 		yield neighbor
 
-
-
 def swap_two_values_generator(state):
 	problem = state.problem
 	solution = state.solution
@@ -143,16 +144,27 @@ def swap_two_values_generator(state):
 	# yield neighbor
 
 	while True:
-		variable = random.choice(problem.variables)
-		variable1 = random.choice(problem.variables)
+		# variable = random.choice(problem.variables)
+		# variable1 = random.choice(problem.variables)
 
-		value = solution[variable]
-		value1 = solution[variable1]
+		# value = solution[variable]
+		# value1 = solution[variable1]
+
+		# neighbor = state.copy()
+		# neighbor.solution[variable1] = value1
+		# neighbor.solution[variable2] = value
+		# neighbor.changes = [(variable, value1), (variable1, value)]
+		# yield neighbor
+		variable1 = random.choice(problem.variables)
+		variable2 = random.choice(problem.variables)
+
+		value = solution[variable1]
+		value1 = solution[variable2]
 
 		neighbor = state.copy()
 		neighbor.solution[variable1] = value1
 		neighbor.solution[variable2] = value
-		neighbor.changes = [(variable, value1), (variable1, value)]
+		neighbor.changes = [(variable1, value1), (variable2, value)]
 		yield neighbor
 
 
