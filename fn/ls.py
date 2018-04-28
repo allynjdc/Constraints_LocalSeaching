@@ -45,7 +45,7 @@ def change_upto_two_values(state):
 			neighbor = state.copy()
 			neighbor.solution[var1] = val1
 			neighbor.solution[var2] = val2
-			neighbor.changes = [(var1,val1),(val2,val2)]
+			neighbor.changes = [(var1,val1),(var2,val2)]
 			neighbors.append(neighbor)
 
 	return neighbors
@@ -103,9 +103,9 @@ def change_upto_two_values_generator(state):
 	while True:
 
 		variable = random.choice(problem.variables)
-		variable1 = random.choice(problem.variables)
-
 		value = random.choice(problem.domain[variable])
+
+		variable1 = random.choice(problem.variables)
 		value1 = random.choice(problem.domain[variable1])
 
 		neighbor = state.copy()
@@ -128,15 +128,15 @@ def swap_two_values_generator(state):
 	while True:
 
 		variable1 = random.choice(problem.variables)
-		variable2 = random.choice(problem.variables)
-
 		value = solution[variable1]
+
+		variable2 = random.choice(problem.variables)
 		value1 = solution[variable2]
 
 		neighbor = state.copy()
-		neighbor.solution[variable1] = value1
-		neighbor.solution[variable2] = value
-		neighbor.changes = [(variable1, value1), (variable2, value)]
+		neighbor.solution[variable1] = value1 	# SWAP
+		neighbor.solution[variable2] = value 	# SWAP
+		neighbor.changes = [(variable1, value1), (variable2, value)] 	# SWAP
 		
 		yield neighbor
 
