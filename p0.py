@@ -60,6 +60,7 @@ def test5():
 def test6():
     #problem_name = 'plants'     
     problem_name = 'magic_square'
+
     option = 'combination'   
     #option = 'permutation'   
 
@@ -74,7 +75,7 @@ def test6():
         solver.config.all_different = False
     elif option == 'permutation':
         solver.config.all_different = True
-
+ 
     solver.solve()
     print('Solutions found:',len(solver.solutions))
 

@@ -100,7 +100,7 @@ def custom_value_ordering(state,variable):
 		return default_order(state,variable)
 	
 	# Counting the current state's domain values
-	new_state_count = []
+	new_state_count = [] 
 	for domain_value in domain:
 		# Creating new state 
 		new_state = state.copy()

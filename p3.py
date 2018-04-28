@@ -85,8 +85,8 @@ def test3():
     display_solutions(problem,solver)
 
 def test4():
-    problem_name,test_case = 'knapsack',99
-    # problem_name,test_case = 'vertex_cover',99
+    # problem_name,test_case = 'knapsack',99
+    problem_name,test_case = 'vertex_cover',99
 
     option = 'no_degradation'
     # option = 'always_improve'
@@ -166,7 +166,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 2 
+    test = 4 
 
     if test == 1:
         test1()
